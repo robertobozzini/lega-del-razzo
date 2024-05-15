@@ -1,0 +1,24 @@
+import pygame,math,sys,random
+  
+  class Car:
+    def __init__(self,num,image):
+      if num==1:
+        self.x=
+        self.y=
+      else:
+        self.x=
+        self.y=
+      self.pos=(self.x,self.y)
+      self.onground=true
+      self.image=pygame.load.image(image)
+  
+    def Onground(self):
+      if self.y>= :
+        self.y= 
+        self.onground=true
+      elif self.y<= :
+        self.y= 
+        self.onground=true
+    
+  
+      
