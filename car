@@ -1,7 +1,7 @@
 import pygame,math,sys,random
   
   class Car:
-    def __init__(self,num,image):
+    def __init__(self,num,image,turbimage="turbo.png"):
       if num==1:
         self.x=
         self.y=
@@ -11,6 +11,9 @@ import pygame,math,sys,random
       self.pos=(self.x,self.y)
       self.onground=true
       self.image=pygame.load.image(image)
+      self.turbo=100
+      self.isturbo==0
+      self.turbimage==pygame.load.image(turbimage)
   
     def Onground(self):
       if self.y>= :
@@ -19,6 +22,11 @@ import pygame,math,sys,random
       elif self.y<= :
         self.y= 
         self.onground=true
+    def Draw(self):
+        if isturbo:
+
+    
+    
     
   
       
