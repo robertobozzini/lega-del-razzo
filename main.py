@@ -50,17 +50,17 @@ while True:
             pygame.quit()
             sys.exit()
         
-        elif event.type==pygame.KEYDOWN:
-            k = pygame.key.get_pressed()
+        #elif event.type==pygame.KEYDOWN:
+        k = pygame.key.get_pressed()
             #car1
-            if k[K_w]:
-                car1.move("up")
-            elif k[K_s]:
-                car1.move("down")
-            if k[K_a]:
-                car1.move("left")
-            elif k[K_d]:
-                car1.move("right")
+        if k[K_w]:
+            car1.move("up")
+        elif k[K_s]:
+            car1.move("down")
+        if k[K_a]:
+            car1.move("left")
+        elif k[K_d]:
+            car1.move("right")
         
             #car2
             #if k[K_UP]:
@@ -69,5 +69,5 @@ while True:
             #if k[K_RIGHT]:
 
             
-            
+    fpsclock.tick(fps)
     pygame.display.update()
