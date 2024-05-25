@@ -49,4 +49,25 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+        
+        elif event.type==pygame.KEYDOWN:
+            k = pygame.key.get_pressed()
+            #car1
+            if k[K_w]:
+                car1.move("up")
+            elif k[K_s]:
+                car1.move("down")
+            if k[K_a]:
+                car1.move("left")
+            elif k[K_d]:
+                car1.move("right")
+        
+            #car2
+            #if k[K_UP]:
+            #if k[K_LEFT]:
+            #if k[K_DOWN]:
+            #if k[K_RIGHT]:
+
+            
+            
     pygame.display.update()
