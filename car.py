@@ -196,6 +196,20 @@ class Car:
       angolo-=180
 
     self.imagetodraw=pygame.transform.rotate(self.image,angolo)
-    self.display.blit(self.imagetodraw,self.pos)
+    self.rect=self.image.get_rect()
+    ix,iy=self.rect.bottomleft
+    self.rect=self.imagetodraw.get_rect()
+    fx,fy=self.rect.bottomleft
+    dx=fx-ix
+    dy=fy-iy
+    x=self.x-dx
+    y=self.y-dy
+    pos=(x,y)
+    #self.x-=dx
+    #self.y-=dy
+    #self.pos=(self.x,self.y)
+    pygame.draw.circle(self.display,(0,0,0),self.rect.bottomleft,10,0)
+    pygame.draw.circle(self.display,(255,255,255),(ix,iy),10,0)
+    self.display.blit(self.imagetodraw,pos)
 
     
