@@ -64,14 +64,14 @@ class Car:
       self.angle+=6
       #self.speedx= -self.speed
     
-
-    if dir=="down"  and not self.hit("down"):
+    if dir=="up"  and not self.hit("up"):
+      self.x+=int(math.cos(math.radians(self.angle))*self.speed)
+      self.y-=int(math.sin(math.radians(self.angle))*self.speed)
+    elif dir=="down"  and not self.hit("down"):
       #self.speedy= self.speed
-      self.x+=int(math.cos(self.angle/180)*self.speed)
-      self.y+=int(math.sin(self.angle/180)*self.speed)
-    elif dir=="up"  and not self.hit("up"):
-      self.x-=int(math.cos(self.angle/180)*self.speed)
-      self.y-=int(math.sin(self.angle/180)*self.speed)
+      self.x-=int(math.cos(math.radians(self.angle))*self.speed)
+      self.y+=int(math.sin(math.radians(self.angle))*self.speed)
+
     
     #self.x+=self.speedx
     #self.y+=self.speedy
