@@ -47,13 +47,17 @@ while True:
     display.blit(mappa,(0,0))
     car1.Draw()
     screen.blit(display,(0,0))
-    print(car1.angle)
+    #print(car1.angle)
     k = pygame.key.get_pressed()
         #car1
     if k[K_w]:
         car1.move("up")
+        print("up",end=" ")
+        print(car1.dove)
     elif k[K_s]:
         car1.move("down")
+        print("down",end=" ")
+        print(car1.dove)
     if k[K_a]:
         car1.move("left")
     elif k[K_d]:
