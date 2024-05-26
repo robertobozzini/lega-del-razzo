@@ -5,7 +5,7 @@ from pygame.locals import *
 from random import randint
 #from ball import Ball
 from car import Car
-
+from ball import Ball
 pygame.init()
 
 white=(255,255,255)
@@ -35,7 +35,10 @@ font=pygame.font.Font("freesansbold.ttf",32)
 testo=font.render("secondi=", True, black, white)
 spaziotesto=testo.get_rect()
 spaziotesto.center=(0,0)
+
 car1=Car(display,1,1)
+car2=Car(display,2,2)
+ball=Ball(WIDTH,HEIGHT,display)
 
 conta=0
 while True:
@@ -46,18 +49,23 @@ while True:
     #screen.blit(mappa,(0,0))
     display.blit(mappa,(0,0))
     car1.Draw()
+
+    ball.Draw()
+    
     screen.blit(display,(0,0))
+
+    ball.Move()
     #print(car1.angle)
     k = pygame.key.get_pressed()
         #car1
     if k[K_w]:
         car1.move("up")
-        print("up",end=" ")
-        print(car1.dove)
+        #print("up",end=" ")
+        #print(car1.dove)
     elif k[K_s]:
         car1.move("down")
-        print("down",end=" ")
-        print(car1.dove)
+        #print("down",end=" ")
+        #print(car1.dove)
     if k[K_a]:
         car1.move("left")
     elif k[K_d]:
