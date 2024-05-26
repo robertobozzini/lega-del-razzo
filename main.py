@@ -37,14 +37,17 @@ spaziotesto=testo.get_rect()
 spaziotesto.center=(0,0)
 car1=Car(display,1,1)
 
+conta=0
 while True:
-    
-    car1.Onground()
+    #if car1.muoviruota(conta):
+        #conta=0
+    #else: conta+=1
+    #car1.Onground()
     #screen.blit(mappa,(0,0))
     display.blit(mappa,(0,0))
     car1.Draw()
     screen.blit(display,(0,0))
-
+    print(car1.angle)
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
@@ -53,14 +56,16 @@ while True:
         #elif event.type==pygame.KEYDOWN:
         k = pygame.key.get_pressed()
             #car1
-        if k[K_w]:
-            car1.move("up")
-        elif k[K_s]:
-            car1.move("down")
         if k[K_a]:
             car1.move("left")
         elif k[K_d]:
             car1.move("right")
+
+        if k[K_w]:
+            car1.move("up")
+        elif k[K_s]:
+            car1.move("down")
+
         
             #car2
             #if k[K_UP]:

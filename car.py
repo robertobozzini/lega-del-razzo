@@ -9,8 +9,9 @@ class Car:
                pygame.image.load("./immagini/octane1r.png"),pygame.image.load("./immagini/octane2r.png"),
                pygame.image.load("./immagini/dominus1.png"),pygame.image.load("./immagini/dominus2.png"),
                pygame.image.load("./immagini/dominus1r.png"),pygame.image.load("./immagini/dominus2r.png")]
-    for i,immagine in enumerate(listaimmagini):
-      listaimmagini[i]=pygame.transform.scale(immagine,(256,180))
+    for i in range(0,len(listaimmagini),2):
+      listaimmagini[i]=pygame.transform.scale(listaimmagini[i],(256,180))
+      listaimmagini[i+1]=pygame.transform.scale(listaimmagini[i+1],(356,220))
 
 
     if num==1:
@@ -57,25 +58,46 @@ class Car:
   def move(self,dir):
 
     if dir=="right" and not self.hit("right"):
-      self.speedx= self.speed
+      self.angle-=6
+      #self.speedx= self.speed
     elif dir=="left" and not self.hit("left"):
-      self.speedx= -self.speed
-    else:
-      self.speedx=0
+      self.angle+=6
+      #self.speedx= -self.speed
+    
+
     if dir=="down"  and not self.hit("down"):
-      self.speedy= self.speed
+      #self.speedy= self.speed
+      self.x+=int(math.cos(self.angle/180)*self.speed)
+      self.y+=int(math.sin(self.angle/180)*self.speed)
     elif dir=="up"  and not self.hit("up"):
-      self.speedy= -self.speed
-    else:
-      self.speedy=0
-    self.x+=self.speedx
-    self.y+=self.speedy
+      self.x-=int(math.cos(self.angle/180)*self.speed)
+      self.y-=int(math.sin(self.angle/180)*self.speed)
+    
+    #self.x+=self.speedx
+    #self.y+=self.speedy
     self.pos=(self.x,self.y)
 
-    if self.speedx!=0:
-      fspeedy,fspeedx=float(self.speedy),float(self.speedx)
-      self.angle=math.atan(fspeedy/fspeedx)
-  
+    #if self.speedx<0:
+      #self.image=self.images[1]
+    #elif self.speedx>0:
+      #self.image=self.images[0]
+    
+    #if self.speedx!=0:
+      #fspeedy,fspeedx=float(self.speedy),float(self.speedx)
+      #self.angle=math.atan(fspeedy/fspeedx)
+  def muoviruota(self,conta):
+    if conta==4:
+      if self.speedx!=0 or self.speedy!=0:
+        if self.image==self.images[0]:
+          self.image=self.images[1]
+        elif self.image==self.imager[0]:
+          self.image=self.imager[0]
+        elif self.image==self.images[1]:
+          self.image=self.images[1]
+        elif self.image==self.imager[1]:
+          self.image=self.imager[1]
+      return True
+    return False
   def Onground(self):
     
     if self.hit("down"):
@@ -94,25 +116,25 @@ class Car:
   
   def hit(self,dir):
     
-    if self.x>= 1500 and dir=="right":
+    if self.x> 1500 and dir=="right":
       self.x= 1500
       self.angle=90
       return True
-    elif self.x<= 100 and dir=="left":
+    elif self.x< 100 and dir=="left":
       self.x= 100
       self.angle=90
       return True
     
-    if self.y>= 700 and dir=="down":
+    if self.y> 700 and dir=="down":
       self.y= 700
       self.angle=0
       return True
-    elif self.y<= 100 and dir=="up":
+    elif self.y< 100 and dir=="up":
       self.y= 100
       self.angle=180
       return True
-    else:
-      return False
+    
+    return False
   def Draw(self):
     self.imagetodraw=pygame.transform.rotate(self.image,self.angle)
     self.display.blit(self.imagetodraw,self.pos)
