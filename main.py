@@ -52,6 +52,8 @@ while True:
     print("right left top bottom")
     print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
     ball.Draw()
+    print(ball.punticardinali)
+    print(ball.puntistorti)
     
     screen.blit(display,(0,0))
 

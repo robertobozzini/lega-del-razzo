@@ -20,6 +20,7 @@ class Ball:
         self.accgrav=0.2
         self.punticardinali=[(self.x+270/2,self.y),(self.x,self.y+330/2),(self.x+270/2,self.y+330),(self.x+270,self.y+330/2)]
         self.puntistorti=[(self.x,self.y),(self.x,self.y+330),(self.x+270,self.y+330),(self.x+270,self.y)]
+        self.speed=5
     def Move(self):
 
         self.x+=self.dirx
@@ -52,41 +53,68 @@ class Ball:
             self.dir=(-idir[0],-idir[1])
         '''
     def collide(self,car):
-        self.punticardinali=[(self.x+270/2,self.y),(self.x,self.y+330/2),(self.x+270,self.y+330),(self.x+270/2,self.y+330)]
+        self.punticardinali=[(self.x+270/2,self.y),(self.x,self.y+330/2),(self.x+270,self.y+330/2),(self.x+270/2,self.y+330)]
         self.puntistorti=[(self.x,self.y),(self.x,self.y+330),(self.x+270,self.y+330),(self.x+270,self.y)]
         #rect.collidepoint(coordinate)
         cond=False
+        recc=pygame.Rect(car.x,car.y,car.width,car.height)
         for i,punto in enumerate(self.punticardinali):
-            if car.rect.collidepoint(punto):
+            if recc.collidepoint(punto):
                 if i==0:
-                    self.diry=abs(self.diry)
+                    if self.diry<self.speed:
+                        self.diry==self.speed
+                    #self.diry=abs(self.diry)
+
                 elif i==1:
-                    self.dirx=abs(self.dirx)
+                    if self.dirx<self.speed:
+                        self.dirx==self.speed
+                    #self.dirx=abs(self.dirx)
                 elif i==2:
-                    self.diry=-abs(self.diry)
+                    if self.diry>-self.speed:
+                        self.diry==-self.speed
+                    #self.diry=-abs(self.diry)
                 elif i==3:
-                    self.dirx=-abs(self.dirx)
+                    if self.dirx>-self.speed:
+                        self.dirx==-self.speed
+                    #self.dirx=-abs(self.dirx)
                 cond=True
 
         for i,punto in enumerate(self.punticardinali):
-            if car.rect.collidepoint(punto):
+            if recc.collidepoint(punto):
                 if i==0:
-                    self.diry=abs(self.diry)
-                    self.dirx=abs(self.dirx)
+                    if self.diry<self.speed:
+                        self.diry==self.speed
+                    if self.dirx<self.speed:
+                        self.dirx==self.speed
+                    #self.diry=abs(self.diry)
+                    #self.dirx=abs(self.dirx)
                 elif i==1:
-                    self.diry=-abs(self.diry)
-                    self.dirx=abs(self.dirx)
+                    if self.diry>-self.speed:
+                        self.diry==-self.speed
+                    if self.dirx<self.speed:
+                        self.dirx==self.speed
+                    #self.diry=-abs(self.diry)
+                    #self.dirx=abs(self.dirx)
                 elif i==2:
-                    self.dirx=-abs(self.dirx)
-                    self.diry=-abs(self.diry)
+                    if self.dirx>-self.speed:
+                        self.dirx==-self.speed
+                    if self.diry>-self.speed:
+                        self.diry==-self.speed
+                    #self.dirx=-abs(self.dirx)
+                    #self.diry=-abs(self.diry)
                 elif i==3:
-                    self.dirx=-abs(self.dirx)
-                    self.diry=abs(self.diry)
+                    if self.dirx>-self.speed:
+                        self.dirx==-self.speed
+                    if self.diry<self.speed:
+                        self.diry==self.speed
+                    #self.dirx=-abs(self.dirx)
+                    #self.diry=abs(self.diry)
                 cond=True
         return cond
     
     def gol(self):
         if (self.rect.right<=220 and self.rect.top>300 and self.rect.top<520):
+
             self.punteggio[1]+=1
             self.x=self.WIDTH//2-(270/2)
             self.y=self.HEIGHT//2-(330/2)
