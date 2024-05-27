@@ -85,6 +85,27 @@ class Ball:
                 cond=True
         return cond
     
+    def gol(self):
+        if (self.rect.right<=220 and self.rect.top>300 and self.rect.top<520):
+            self.punteggio[1]+=1
+            self.x=self.WIDTH//2-(270/2)
+            self.y=self.HEIGHT//2-(330/2)
+            self.pos=(self.x,self.y)
+            self.rect=self.image.get_rect()
+            self.dirx=0
+            self.diry=0
+            return True
+        if  (self.rect.left>=1580 and self.rect.top>300 and self.rect.top<520):
+            self.punteggio[0]+=1
+            self.x=self.WIDTH//2-(270/2)
+            self.y=self.HEIGHT//2-(330/2)
+            self.pos=(self.x,self.y)
+            self.rect=self.image.get_rect()
+            self.dirx=0
+            self.diry=0
+            return True          
+        return False
+
     def Draw(self):
         self.display.blit(self.image,self.rect)
     #def collider(self,car1,car2):
