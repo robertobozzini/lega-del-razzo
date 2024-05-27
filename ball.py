@@ -18,6 +18,8 @@ class Ball:
         self.dirx=0
         self.diry=0
         self.accgrav=0.2
+        self.punticardinali=[(self.x+270/2,self.y),(self.x,self.y+330/2),(self.x+270/2,self.y+330),(self.x+270,self.y+330/2)]
+        self.puntistorti=[(self.x,self.y),(self.x,self.y+330),(self.x+270,self.y+330),(self.x+270,self.y)]
     def Move(self):
 
         self.x+=self.dirx
@@ -32,8 +34,8 @@ class Ball:
         if self.rect.top < 30:
             self.diry = -self.diry
         if self.rect.bottom > 900:
-            self.rect.bottom = 900                     # <---
-            self.y = self.rect.top                               # <---
+            self.rect.bottom = 900                     
+            self.y = self.rect.top                               
             self.diry = -self.diry
         self.dirx=self.dirx*0.99
         self.diry=self.diry*0.99+self.accgrav
@@ -49,6 +51,40 @@ class Ball:
             idir=self.dir
             self.dir=(-idir[0],-idir[1])
         '''
+    def collide(self,car):
+        self.punticardinali=[(self.x+270/2,self.y),(self.x,self.y+330/2),(self.x+270,self.y+330),(self.x+270/2,self.y+330)]
+        self.puntistorti=[(self.x,self.y),(self.x,self.y+330),(self.x+270,self.y+330),(self.x+270,self.y)]
+        #rect.collidepoint(coordinate)
+        cond=False
+        for i,punto in enumerate(self.punticardinali):
+            if car.rect.collidepoint(punto):
+                if i==0:
+                    self.diry=abs(self.diry)
+                elif i==1:
+                    self.dirx=abs(self.dirx)
+                elif i==2:
+                    self.diry=-abs(self.diry)
+                elif i==3:
+                    self.dirx=-abs(self.dirx)
+                cond=True
+
+        for i,punto in enumerate(self.punticardinali):
+            if car.rect.collidepoint(punto):
+                if i==0:
+                    self.diry=abs(self.diry)
+                    self.dirx=abs(self.dirx)
+                elif i==1:
+                    self.diry=-abs(self.diry)
+                    self.dirx=abs(self.dirx)
+                elif i==2:
+                    self.dirx=-abs(self.dirx)
+                    self.diry=-abs(self.diry)
+                elif i==3:
+                    self.dirx=-abs(self.dirx)
+                    self.diry=abs(self.diry)
+                cond=True
+        return cond
+    
     def gol(self):
         if (self.rect.right<=220 and self.rect.top>300 and self.rect.top<520):
             

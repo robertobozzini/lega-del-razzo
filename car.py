@@ -165,11 +165,11 @@ class Car:
       self.onground=False
   
   def hit(self,dir):
-    angolo=self.angle
+    self.angolo=self.angle
     if self.angle>90 and self.angle<=270:
-      angolo-=180
+      self.angolo-=180
 
-    self.imagetodraw=pygame.transform.rotate(self.image,angolo)
+    self.imagetodraw=pygame.transform.rotate(self.image,self.angolo)
     self.rect=self.imagetodraw.get_rect()
 
     hit=False
@@ -215,11 +215,11 @@ class Car:
 
 
   def Draw(self):
-    angolo=self.angle
+    self.angolo=self.angle
     if self.angle>90 and self.angle<=270:
-      angolo-=180
+      self.angolo-=180
 
-    self.imagetodraw=pygame.transform.rotate(self.image,angolo)
+    self.imagetodraw=pygame.transform.rotate(self.image,self.angolo)
      
     self.rect1=self.image.get_rect()
     #'''
@@ -263,8 +263,8 @@ class Car:
     #self.x-=dx
     #self.y-=dy
     #self.pos=(self.x,self.y)
-    pygame.draw.circle(self.display,(0,0,0),(fx+self.x,fy+self.y),10,0)
-    pygame.draw.circle(self.display,(255,255,255),(ix+self.x,iy+self.y),10,0)
+    #pygame.draw.circle(self.display,(0,0,0),(fx+self.x,fy+self.y),10,0)
+    #pygame.draw.circle(self.display,(255,255,255),(ix+self.x,iy+self.y),10,0)
     self.display.blit(self.imagetodraw,pos)
 
     
