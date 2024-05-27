@@ -58,18 +58,34 @@ while True:
     #print(car1.angle)
     k = pygame.key.get_pressed()
         #car1
-    if k[K_w]:
-        car1.move("up")
-        #print("up",end=" ")
-        #print(car1.dove)
-    elif k[K_s]:
-        car1.move("down")
-        #print("down",end=" ")
-        #print(car1.dove)
-    if k[K_a]:
-        car1.move("left")
-    elif k[K_d]:
-        car1.move("right")
+    if not ball.collide(car1):
+        if k[K_w]:
+            car1.move("up")
+            #print("up",end=" ")
+            #print(car1.dove)
+        elif k[K_s]:
+            car1.move("down")
+            #print("down",end=" ")
+            #print(car1.dove)
+        if k[K_a]:
+            car1.move("left")
+        elif k[K_d]:
+            car1.move("right")
+    '''
+    if not ball.collide(car2):
+        if k[K_UP]:
+            car2.move("up")
+            #print("up",end=" ")
+            #print(car1.dove)
+        elif k[K_DOWN]:
+            car2.move("down")
+            #print("down",end=" ")
+            #print(car1.dove)
+        if k[K_LEFT]:
+            car2.move("left")
+        elif k[K_RIGHT]:
+            car2.move("right")
+    '''
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
