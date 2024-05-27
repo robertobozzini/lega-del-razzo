@@ -7,7 +7,7 @@ class Ball:
         self.WIDTH=WIDTH
         self.HEIGHT=HEIGHT
         self.pos=(self.x,self.y)
-
+        self.punteggio=[0,0]
         self.display=display
         
         #self.center=(self.x+self.dimensioni[0],self.y+self.dimensioni[1])
