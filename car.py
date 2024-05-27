@@ -13,7 +13,7 @@ class Car:
       listaimmagini[i]=pygame.transform.scale(listaimmagini[i],(212,98))
       listaimmagini[i+1]=pygame.transform.scale(listaimmagini[i+1],(212,98))
     self.dove="destra"
-
+    self.num=num
     if num==1:
       self.x=400
       self.y=700
@@ -199,8 +199,20 @@ class Car:
     return hit
   #reset macchina
   def golcar (self):
-    # if se <<<<<àmi segno punteggio nel main con una lista due variabili pos 0 punteggio 1 pos 1 punteggio 2
-    pass
+    # nel main con una lista due variabili pos 0 punteggio 1 pos 1 punteggio 2
+    if self.num==1:
+      self.x=400
+      self.y=700
+      self.pos=(self.x,self.y)
+      self.angle=0
+      self.rect=self.image.get_rect()
+    else:
+      self.x= 1300
+      self.y= 700
+      self.pos=(self.x,self.y)
+      self.angle=0
+      self.rect=self.image.get_rect()
+
 
   def Draw(self):
     self.angolo=self.angle
