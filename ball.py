@@ -27,7 +27,7 @@ class Ball:
         self.rect.top=self.y
         self.rect.left=self.x
 
-        if self.rect.left < 100 or self.rect.right > 1700:
+        if (self.rect.left < 220 and self.rect.top<300) or (self.rect.left<220 and self.rect.bottom>520) or (self.rect.right>1580 and self.rect.top<300)  or (self.rect.right>1580 and self.rect.bottom>520):
             self.x = -self.dirx
         if self.rect.top < 30:
             self.diry = -self.diry
