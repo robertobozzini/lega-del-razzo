@@ -4,7 +4,7 @@ import pygame,math,sys,random
 # octane 1280 x 894
 class Car:
   def __init__(self,display,num,numcar,angle=0):
-
+    
     listaimmagini=[pygame.image.load("./immagini/octane1f.png"),pygame.image.load("./immagini/octane2f.png"),
                pygame.image.load("./immagini/octane1rf.png"),pygame.image.load("./immagini/octane2rf.png"),
                pygame.image.load("./immagini/dominus1.png"),pygame.image.load("./immagini/dominus2.png"),
@@ -23,6 +23,8 @@ class Car:
         self.images=(listaimmagini[0],listaimmagini[1])
         #self.imager=(pygame.image.load("./immagini/octane1r.png"),pygame.image.load("./immagini/octane2r.png"))
         self.imager=(listaimmagini[2],listaimmagini[3])
+        self.width=212
+        self.height=98
       else:
         #self.images=(pygame.image.load("./immagini/dominus1.png"),pygame.image.load("./immagini/dominus2.png"))
         self.images=(listaimmagini[4],listaimmagini[5])
@@ -173,29 +175,32 @@ class Car:
     self.rect=self.imagetodraw.get_rect()
 
     hit=False
-    if self.rect.right+self.x> 1580:# and dir=="right":
-      self.x= 1500
+    if self.x+self.width> 1700:# and dir=="right":
+      self.x= 1700-self.width
       self.angle=90
       hit=True
-    elif self.rect.left+self.x< 220:# and dir=="left":
+    elif self.x< 100:# and dir=="left":
       self.x= 100
       self.angle=270
       hit=True
 
-    if self.rect.bottom+self.y> 700:# and dir=="down":
-      self.y= 700
+    if self.y+self.height> 850:# and dir=="down":
+      #if self.rect.bottom+self.y> 900:
       self.angle=0
+      self.y= 850-self.height
+      
       hit=True
-    elif self.rect.top+self.y< 30:# and dir=="up":
+
+    elif self.y< 30:# and dir=="up":
       self.y= 30
       self.angle=180
       hit=True
-    #'''
+    '''
     if (self.dove=="destra" and dir=="right") or (self.dove=="sinistra" and dir=="left"):
       if (self.x==1500 and self.angle==90)or (self.x==100 and self.angle==90) or (self.y==700 and self.angle==0) or (self.y==100 and self.angle==180): 
         hit=True
 
-    #'''
+    '''
     return hit
   #reset macchina
   def golcar (self):

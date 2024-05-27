@@ -49,7 +49,8 @@ while True:
     #screen.blit(mappa,(0,0))
     display.blit(mappa,(0,0))
     car1.Draw()
-
+    print("right left top bottom")
+    print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
     ball.Draw()
     
     screen.blit(display,(0,0))
@@ -58,7 +59,8 @@ while True:
     #print(car1.angle)
     k = pygame.key.get_pressed()
         #car1
-    if not ball.collide(car1):
+    cond1=ball.collide(car1)
+    if not cond1:
         if k[K_w]:
             car1.move("up")
             #print("up",end=" ")
