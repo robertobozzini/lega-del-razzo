@@ -5,13 +5,13 @@ import pygame,math,sys,random
 class Car:
   def __init__(self,display,num,numcar,angle=0):
 
-    listaimmagini=[pygame.image.load("./immagini/octane1.png"),pygame.image.load("./immagini/octane2.png"),
-               pygame.image.load("./immagini/octane1r.png"),pygame.image.load("./immagini/octane2r.png"),
+    listaimmagini=[pygame.image.load("./immagini/octane1f.png"),pygame.image.load("./immagini/octane2f.png"),
+               pygame.image.load("./immagini/octane1rf.png"),pygame.image.load("./immagini/octane2rf.png"),
                pygame.image.load("./immagini/dominus1.png"),pygame.image.load("./immagini/dominus2.png"),
                pygame.image.load("./immagini/dominus1r.png"),pygame.image.load("./immagini/dominus2r.png")]
     for i in range(0,len(listaimmagini),2):
-      listaimmagini[i]=pygame.transform.scale(listaimmagini[i],(256,180))
-      listaimmagini[i+1]=pygame.transform.scale(listaimmagini[i+1],(356,220))
+      listaimmagini[i]=pygame.transform.scale(listaimmagini[i],(212,98))
+      listaimmagini[i+1]=pygame.transform.scale(listaimmagini[i+1],(212,98))
     self.dove="destra"
 
     if num==1:
@@ -196,10 +196,41 @@ class Car:
       angolo-=180
 
     self.imagetodraw=pygame.transform.rotate(self.image,angolo)
-    self.rect=self.image.get_rect()
-    ix,iy=self.rect.bottomleft
+     
+    self.rect1=self.image.get_rect()
+    #'''
+    if self.angle >180 and self.angle< 360:#270
+      ix,iy=self.rect1.topright
+    #elif self.angle >=270 and self.angle< 360:
+      #ix,iy=self.rect1.topleft
+    else:
+      ix,iy=self.rect1.bottomleft
+
+    #'''
     self.rect=self.imagetodraw.get_rect()
-    fx,fy=self.rect.bottomleft
+    #'''
+    if self.angle >180 and self.angle< 360:#270
+      fx,fy=self.rect.topright
+    #elif self.angle >=270 and self.angle< 360:
+      #fx,fy=self.rect.topleft
+    else:
+      fx,fy=self.rect.bottomleft
+    '''
+    if self.angle>=0 and self.angle<=180:
+      if self.angle<=90:
+        ix,iy=self.rect1.bottomleft
+        fx,fy=self.rect.bottomleft
+      else:        
+        ix,iy=self.rect1.bottomright
+        fx,fy=self.rect.bottomright
+    else:
+      if self.angle>=270:
+        ix,iy=self.rect1.topleft
+        fx,fy=self.rect.topleft
+      else:
+        ix,iy=self.rect1.topright
+        fx,fy=self.rect.topright
+    '''
     dx=fx-ix
     dy=fy-iy
     x=self.x-dx
@@ -208,8 +239,8 @@ class Car:
     #self.x-=dx
     #self.y-=dy
     #self.pos=(self.x,self.y)
-    pygame.draw.circle(self.display,(0,0,0),self.rect.bottomleft,10,0)
-    pygame.draw.circle(self.display,(255,255,255),(ix,iy),10,0)
+    pygame.draw.circle(self.display,(0,0,0),(fx+self.x,fy+self.y),10,0)
+    pygame.draw.circle(self.display,(255,255,255),(ix+self.x,iy+self.y),10,0)
     self.display.blit(self.imagetodraw,pos)
 
     
