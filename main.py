@@ -90,6 +90,8 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+    if ball.gol():
+        pass
         
         #elif event.type==pygame.KEYDOWN:
         '''

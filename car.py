@@ -197,6 +197,11 @@ class Car:
 
     #'''
     return hit
+  #reset macchina
+  def golcar (self):
+    # if se <<<<<àmi segno punteggio nel main con una lista due variabili pos 0 punteggio 1 pos 1 punteggio 2
+    pass
+
   def Draw(self):
     self.angolo=self.angle
     if self.angle>90 and self.angle<=270:
