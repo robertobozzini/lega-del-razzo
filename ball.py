@@ -50,7 +50,8 @@ class Ball:
             self.dir=(-idir[0],-idir[1])
         '''
     def gol(self):
-        if (self.rect.right<=220 and self.rect.top>300 and self.rect.top<520) or (self.rect.left>=1580 and self.rect.top>300 and self.rect.top<520):
+        if (self.rect.right<=220 and self.rect.top>300 and self.rect.top<520):
+            
             self.x=self.WIDTH//2-(270/2)
             self.y=self.HEIGHT//2-(330/2)
             self.pos=(self.x,self.y)
