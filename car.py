@@ -165,21 +165,28 @@ class Car:
       self.onground=False
   
   def hit(self,dir):
+    angolo=self.angle
+    if self.angle>90 and self.angle<=270:
+      angolo-=180
+
+    self.imagetodraw=pygame.transform.rotate(self.image,angolo)
+    self.rect=self.imagetodraw.get_rect()
+
     hit=False
-    if self.x> 1500:# and dir=="right":
+    if self.rect.right+self.x> 1580:# and dir=="right":
       self.x= 1500
       self.angle=90
       hit=True
-    elif self.x< 100:# and dir=="left":
+    elif self.rect.left+self.x< 220:# and dir=="left":
       self.x= 100
-      self.angle=90
+      self.angle=270
       hit=True
 
-    if self.y> 700:# and dir=="down":
+    if self.rect.bottom+self.y> 700:# and dir=="down":
       self.y= 700
       self.angle=0
       hit=True
-    elif self.y< 30:# and dir=="up":
+    elif self.rect.top+self.y< 30:# and dir=="up":
       self.y= 30
       self.angle=180
       hit=True

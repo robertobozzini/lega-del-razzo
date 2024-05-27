@@ -49,6 +49,7 @@ class Ball:
             idir=self.dir
             self.dir=(-idir[0],-idir[1])
         '''
+    
     def Draw(self):
         self.display.blit(self.image,self.rect)
     #def collider(self,car1,car2):
