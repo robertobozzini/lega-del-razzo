@@ -51,30 +51,35 @@ while True:
     car1.Draw()
     print("right left top bottom")
     print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
-    ball.Draw()
+    
     print(ball.punticardinali)
     print(ball.puntistorti)
-    
-    screen.blit(display,(0,0))
 
-    ball.Move()
+
+    
     #print(car1.angle)
     k = pygame.key.get_pressed()
         #car1
-    cond1=ball.collide(car1)
-    if not cond1:
-        if k[K_w]:
-            car1.move("up")
-            #print("up",end=" ")
-            #print(car1.dove)
-        elif k[K_s]:
-            car1.move("down")
-            #print("down",end=" ")
-            #print(car1.dove)
-        if k[K_a]:
-            car1.move("left")
-        elif k[K_d]:
-            car1.move("right")
+    #cond1=
+    ball.collide(car1)
+    #print(ball.cond)
+    ball.Draw()
+    screen.blit(display,(0,0))
+    ball.Move()
+
+    #if not cond1:
+    if k[K_w]:
+        car1.move("up")
+        #print("up",end=" ")
+        #print(car1.dove)
+    elif k[K_s]:
+        car1.move("down")
+        #print("down",end=" ")w
+        #print(car1.dove)
+    if k[K_a]:
+        car1.move("left")
+    elif k[K_d]:
+        car1.move("right")
     '''
     if not ball.collide(car2):
         if k[K_UP]:
@@ -94,6 +99,9 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif event.type==pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                ball.dirx=5
     if ball.gol():
         pass
         
