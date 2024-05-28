@@ -2,8 +2,11 @@ import pygame,math,sys,random
 
 class Ball:
     def __init__(self,WIDTH,HEIGHT,display):
-        self.x=WIDTH//2-(270/2)
-        self.y=HEIGHT//2-(330/2)
+
+        self.dim=139
+
+        self.x=WIDTH//2-(self.dim/2)
+        self.y=HEIGHT//2-(self.dim/2)
         self.WIDTH=WIDTH
         self.HEIGHT=HEIGHT
         self.pos=(self.x,self.y)
@@ -11,15 +14,17 @@ class Ball:
         self.display=display
         
         #self.center=(self.x+self.dimensioni[0],self.y+self.dimensioni[1])
-        self.image=pygame.image.load("./immagini/Ball.png")
-        self.image=pygame.transform.scale(self.image, (270, 330))
+        self.image=pygame.image.load("./immagini/Ballf.png")
+        self.image=pygame.transform.scale(self.image, (self.dim,self.dim))
         self.rect=self.image.get_rect()
         #self.dir=(0,0)
         self.dirx=0
         self.diry=0
         self.accgrav=0.2
-        self.punticardinali=[(self.x+270/2,self.y),(self.x,self.y+330/2),(self.x+270/2,self.y+330),(self.x+270,self.y+330/2)]
-        self.puntistorti=[(self.x,self.y),(self.x,self.y+330),(self.x+270,self.y+330),(self.x+270,self.y)]
+        self.punticardinali=[(self.x+self.dim/2,self.y),(self.x,self.y+self.dim/2),(self.x+self.dim/2,self.y+self.dim),(self.x+self.dim,self.y+self.dim/2)]
+        self.puntistorti=[(self.x,self.y),(self.x,self.y+self.dim),(self.x+self.dim,self.y+self.dim),(self.x+self.dim,self.y)]
+        self.speed=5
+        #self.cond=False
     def Move(self):
 
         self.x+=self.dirx
@@ -33,8 +38,8 @@ class Ball:
             self.x = -self.dirx
         if self.rect.top < 30:
             self.diry = -self.diry
-        if self.rect.bottom > 900:
-            self.rect.bottom = 900                     
+        if self.rect.bottom > 840:
+            self.rect.bottom = 840                  
             self.y = self.rect.top                               
             self.diry = -self.diry
         self.dirx=self.dirx*0.99
@@ -52,44 +57,76 @@ class Ball:
             self.dir=(-idir[0],-idir[1])
         '''
     def collide(self,car):
-        self.punticardinali=[(self.x+270/2,self.y),(self.x,self.y+330/2),(self.x+270,self.y+330),(self.x+270/2,self.y+330)]
-        self.puntistorti=[(self.x,self.y),(self.x,self.y+330),(self.x+270,self.y+330),(self.x+270,self.y)]
+        self.punticardinali=[(self.x+self.dim/2,self.y),(self.x,self.y+self.dim/2),(self.x+self.dim,self.y+self.dim/2),(self.x+self.dim/2,self.y+self.dim)]
+        self.puntistorti=[(self.x,self.y),(self.x,self.y+self.dim),(self.x+self.dim,self.y+self.dim),(self.x+self.dim,self.y)]
         #rect.collidepoint(coordinate)
         cond=False
+        #recc=car.rect
+        recc=pygame.Rect(car.x,car.y,car.rect.right,car.rect.bottom)
+        self.recc=recc
         for i,punto in enumerate(self.punticardinali):
-            if car.rect.collidepoint(punto):
+            if (recc.collidepoint(punto)):
+            #if self.rect.colliderect(recc).
+
                 if i==0:
-                    self.diry=abs(self.diry)
+                    if self.diry<self.speed:
+                        self.diry=self.speed
+                    #self.diry=abs(self.diry)
+
                 elif i==1:
-                    self.dirx=abs(self.dirx)
+                    if self.dirx<self.speed:
+                        self.dirx=self.speed
+                    #self.dirx=abs(self.dirx)
                 elif i==2:
-                    self.diry=-abs(self.diry)
+                    if self.diry>-self.speed:
+                        self.diry=-self.speed
+                    #self.diry=-abs(self.diry)
                 elif i==3:
-                    self.dirx=-abs(self.dirx)
+                    if self.dirx>-self.speed:
+                        self.dirx=-self.speed
+                    #self.dirx=-abs(self.dirx)
                 cond=True
 
         for i,punto in enumerate(self.punticardinali):
-            if car.rect.collidepoint(punto):
+            if (recc.collidepoint(punto)):
+            #if self.rect.colliderect(recc):
                 if i==0:
-                    self.diry=abs(self.diry)
-                    self.dirx=abs(self.dirx)
+                    if self.diry<self.speed:
+                        self.diry=self.speed
+                    if self.dirx<self.speed:
+                        self.dirx=self.speed
+                    #self.diry=abs(self.diry)
+                    #self.dirx=abs(self.dirx)
                 elif i==1:
-                    self.diry=-abs(self.diry)
-                    self.dirx=abs(self.dirx)
+                    if self.diry>-self.speed:
+                        self.diry=-self.speed
+                    if self.dirx<self.speed:
+                        self.dirx=self.speed
+                    #self.diry=-abs(self.diry)
+                    #self.dirx=abs(self.dirx)
                 elif i==2:
-                    self.dirx=-abs(self.dirx)
-                    self.diry=-abs(self.diry)
+                    if self.dirx>-self.speed:
+                        self.dirx=-self.speed
+                    if self.diry>-self.speed:
+                        self.diry=-self.speed
+                    #self.dirx=-abs(self.dirx)
+                    #self.diry=-abs(self.diry)
                 elif i==3:
-                    self.dirx=-abs(self.dirx)
-                    self.diry=abs(self.diry)
+                    if self.dirx>-self.speed:
+                        self.dirx=-self.speed
+                    if self.diry<self.speed:
+                        self.diry=self.speed
+                    #self.dirx=-abs(self.dirx)
+                    #self.diry=abs(self.diry)
                 cond=True
         return cond
     
     def gol(self):
         if (self.rect.right<=220 and self.rect.top>300 and self.rect.top<520):
+
             self.punteggio[1]+=1
-            self.x=self.WIDTH//2-(270/2)
-            self.y=self.HEIGHT//2-(330/2)
+            self.x=self.WIDTH//2-(self.dim/2)
+            self.y=self.HEIGHT//2-(self.dim/2)
             self.pos=(self.x,self.y)
             self.rect=self.image.get_rect()
             self.dirx=0
@@ -97,8 +134,8 @@ class Ball:
             return True
         if  (self.rect.left>=1580 and self.rect.top>300 and self.rect.top<520):
             self.punteggio[0]+=1
-            self.x=self.WIDTH//2-(270/2)
-            self.y=self.HEIGHT//2-(330/2)
+            self.x=self.WIDTH//2-(self.dim/2)
+            self.y=self.HEIGHT//2-(self.dim/2)
             self.pos=(self.x,self.y)
             self.rect=self.image.get_rect()
             self.dirx=0
@@ -108,6 +145,11 @@ class Ball:
 
     def Draw(self):
         self.display.blit(self.image,self.rect)
+        for punto in self.punticardinali:
+            pygame.draw.circle(self.display,(0,0,0),punto,10,0)
+        for punto in self.puntistorti:
+            pygame.draw.circle(self.display,(0,0,0),punto,10,0)
+        pygame.draw.rect(self.display,(0,0,0),self.recc,1)
     #def collider(self,car1,car2):
         #roba con r
         
