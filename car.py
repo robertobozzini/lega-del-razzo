@@ -121,8 +121,7 @@ class Car:
           self.image=self.images[1]
         '''
         self.dove="sinistra"
-
-
+  
     self.pos=(self.x,self.y)
     if self.angle<=90 or self.angle>270:
       if self.image==self.imager[0]:
@@ -220,6 +219,10 @@ class Car:
 
 
   def Draw(self):
+    if self.y<=700 :
+      self.y+=7
+    
+    self.pos=(self.x,self.y)
     self.angolo=self.angle
     if self.angle>90 and self.angle<=270:
       self.angolo-=180
