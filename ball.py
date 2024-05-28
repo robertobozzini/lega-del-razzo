@@ -63,6 +63,11 @@ class Ball:
         cond=False
         #recc=car.rect
         recc=pygame.Rect(car.x,car.y,car.rect.right,car.rect.bottom)
+        if car.angle<180 and car.angle>0:
+            if car.angle>90:
+                recc.top-=car.width*math.sin(math.radians(car.angle))*(float(car.angle)/180.0)
+            else:
+                recc.top-=car.width*math.sin(math.radians(car.angle))*(float(car.angle)/90.0)
         self.recc=recc
 
         for i,punto in enumerate(self.punticardinali):
@@ -125,7 +130,8 @@ class Ball:
         return cond
     
     def gol(self):
-        if (self.rect.right<=220 and self.rect.top>300 and self.rect.top<520):
+        #right-left invertiti per renderlo piu facile
+        if (self.rect.left<=220 and self.rect.top>300 and self.rect.top<520):
 
             self.punteggio[0]+=1
             self.x=self.WIDTH//2-(self.dim/2)
@@ -135,7 +141,7 @@ class Ball:
             self.dirx=0
             self.diry=0
             return True
-        if  (self.rect.left>=1580 and self.rect.top>300 and self.rect.top<520):
+        if  (self.rect.right>=1580 and self.rect.top>300 and self.rect.top<520):
             self.punteggio[1]+=1
             self.x=self.WIDTH//2-(self.dim/2)
             self.y=self.HEIGHT//2-(self.dim/2)
