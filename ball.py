@@ -152,3 +152,4 @@ class Ball:
         pygame.draw.rect(self.display,(0,0,0),self.recc,1)
     #def collider(self,car1,car2):
         #roba con r
+        

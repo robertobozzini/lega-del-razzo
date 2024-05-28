@@ -69,6 +69,9 @@ while True:
     ball.Move()
 
     #if not cond1:
+    if (k[K_w] or k[K_s] or k[K_a] or k[K_d]):
+        if car1.y<=700:
+            car1.y+=7
     if k[K_w]:
         car1.move("up")
         #print("up",end=" ")
@@ -81,6 +84,9 @@ while True:
         car1.move("left")
     elif k[K_d]:
         car1.move("right")
+
+    #if not car1.hit("down"):
+     #   car1.y=car1.y*1.1
     '''
     if not ball.collide(car2):
         if k[K_UP]:

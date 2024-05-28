@@ -53,7 +53,7 @@ class Car:
     self.angle=angle
     #pygame.transform.rotate(self.image,angle)
     self.display=display
-    self.speed=5
+    self.speed=20
 
 
   def inverti(self):
@@ -106,7 +106,7 @@ class Car:
       
       self.x-=int(math.cos(math.radians(self.angle))*self.speed)
       self.y+=int(math.sin(math.radians(self.angle))*self.speed)
-
+      #self.y=self.y*1.1
       if self.dove=="destra":
 
         self.inverti()
@@ -121,8 +121,7 @@ class Car:
           self.image=self.images[1]
         '''
         self.dove="sinistra"
-
-
+  
     self.pos=(self.x,self.y)
     if self.angle<=90 or self.angle>270:
       if self.image==self.imager[0]:
@@ -220,6 +219,10 @@ class Car:
 
 
   def Draw(self):
+    if self.y<=700 :
+      self.y+=7
+    
+    self.pos=(self.x,self.y)
     self.angolo=self.angle
     if self.angle>90 and self.angle<=270:
       self.angolo-=180
