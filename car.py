@@ -53,7 +53,7 @@ class Car:
     self.angle=angle
     #pygame.transform.rotate(self.image,angle)
     self.display=display
-    self.speed=5
+    self.speed=20
 
 
   def inverti(self):
