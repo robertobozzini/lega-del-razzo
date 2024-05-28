@@ -42,6 +42,7 @@ ball=Ball(WIDTH,HEIGHT,display)
 
 conta=0
 while True:
+
     #if car1.muoviruota(conta):
         #conta=0
     #else: conta+=1
@@ -50,10 +51,10 @@ while True:
     display.blit(mappa,(0,0))
     car1.Draw()
     print("right left top bottom")
-    print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
+    #print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
     
-    print(ball.punticardinali)
-    print(ball.puntistorti)
+    #print(ball.punticardinali)
+    #print(ball.puntistorti)
 
 
     
