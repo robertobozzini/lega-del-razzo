@@ -19,7 +19,7 @@ grey=(128, 128, 128)
 
 #green=pygame.transform.scale(greenn, (1800, 1000))
 #pygame.transform.rotate
-fps=90
+fps=60
 fpsclock=pygame.time.Clock()
 pygame.display.set_caption("lega del razzo")
 
@@ -32,61 +32,54 @@ display = pygame.Surface((1800, 1000))
 mappa=pygame.image.load("./immagini/mappa.png")
 mappa=pygame.transform.scale(mappa, (1800, 1000))
 font=pygame.font.Font("freesansbold.ttf",32)
-testo=font.render("secondi=", True, black, white)
-spaziotesto=testo.get_rect()
-spaziotesto.center=(0,0)
+#testo=font.render("secondi=", True, black, white)
+#spaziotesto=testo.get_rect()
+#spaziotesto.center=(0,0)
+gravit=3
 
-car1=Car(display,1,1)
-car2=Car(display,2,2)
+car1=Car(display,1,1,0,gravit)
+car2=Car(display,2,2,0,gravit)
 ball=Ball(WIDTH,HEIGHT,display)
 
 conta=0
+cond=False
 while True:
 
     #if car1.muoviruota(conta):
         #conta=0
     #else: conta+=1
     #car1.Onground()
-    #screen.blit(mappa,(0,0))
+    
     display.blit(mappa,(0,0))
     car1.Draw()
-    print("right left top bottom")
-    #print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
-    
-    #print(ball.punticardinali)
-    #print(ball.puntistorti)
 
 
-    
-    #print(car1.angle)
     k = pygame.key.get_pressed()
-        #car1
-    #cond1=
-    ball.collide(car1)
+
+    cond=ball.collide(car1)
     #print(ball.cond)
     ball.Draw()
     screen.blit(display,(0,0))
     ball.Move()
 
-    #if not cond1:
+    if ball.gol():
+        #print(f"gol:",ball.punteggio)
+        pass
+
     if (k[K_w] or k[K_s] or k[K_a] or k[K_d]):
         if car1.y<=700:
-            car1.y+=7
+            car1.y+=gravit
     if k[K_w]:
-        car1.move("up")
-        #print("up",end=" ")
-        #print(car1.dove)
-    elif k[K_s]:
-        car1.move("down")
-        #print("down",end=" ")w
-        #print(car1.dove)
-    if k[K_a]:
-        car1.move("left")
-    elif k[K_d]:
-        car1.move("right")
+        car1.move("up",cond)
 
-    #if not car1.hit("down"):
-     #   car1.y=car1.y*1.1
+    elif k[K_s]:
+        car1.move("down",cond)
+
+    if k[K_a]:
+        car1.move("left",cond)
+    elif k[K_d]:
+        car1.move("right",cond)
+
     '''
     if not ball.collide(car2):
         if k[K_UP]:
@@ -109,8 +102,7 @@ while True:
         elif event.type==pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 ball.dirx=5
-    if ball.gol():
-        pass
+
         
         #elif event.type==pygame.KEYDOWN:
         '''
@@ -125,15 +117,6 @@ while True:
         elif k[K_d]:
             car1.move("right")
         '''
-
-
-        
-            #car2
-            #if k[K_UP]:
-            #if k[K_LEFT]:
-            #if k[K_DOWN]:
-            #if k[K_RIGHT]:
-
             
     fpsclock.tick(fps)
     pygame.display.update()

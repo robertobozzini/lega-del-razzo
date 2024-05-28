@@ -3,7 +3,8 @@ import pygame,math,sys,random
 # dominus 1280 x 894
 # octane 1280 x 894
 class Car:
-  def __init__(self,display,num,numcar,angle=0):
+  def __init__(self,display,num,numcar,angle,gravit):
+
     
     listaimmagini=[pygame.image.load("./immagini/octane1f.png"),pygame.image.load("./immagini/octane2f.png"),
                pygame.image.load("./immagini/octane1rf.png"),pygame.image.load("./immagini/octane2rf.png"),
@@ -53,7 +54,8 @@ class Car:
     self.angle=angle
     #pygame.transform.rotate(self.image,angle)
     self.display=display
-    self.speed=20
+    self.speed=15
+    self.gravit=gravit
 
 
   def inverti(self):
@@ -71,7 +73,7 @@ class Car:
       return
     return
   
-  def move(self,dir):
+  def move(self,dir,cond):
 
     if dir=="right" and not self.hit("right"):
       self.angle-=6
@@ -83,45 +85,45 @@ class Car:
       self.angle-=360
     if self.angle<0:
       self.angle+=360
+    if not cond:
+      if dir=="up"  and not self.hit("up"):
+        self.x+=int(math.cos(math.radians(self.angle))*self.speed)
+        self.y-=int(math.sin(math.radians(self.angle))*self.speed)
+
+        if self.dove=="sinistra":
+          self.inverti()
+          '''
+          if self.image==self.images[0]:
+            self.image=self.imager[0]
+          elif self.image==self.images[1]:
+            self.image=self.imager[1]
+          elif self.image==self.imager[0]:
+            self.image=self.images[0]
+          elif self.image==self.imager[1]:
+            self.image=self.images[1]
+          '''
+          self.dove="destra"
+
+      elif dir=="down"  and not self.hit("down"):
+        
+        self.x-=int(math.cos(math.radians(self.angle))*self.speed)
+        self.y+=int(math.sin(math.radians(self.angle))*self.speed)
+        #self.y=self.y*1.1
+        if self.dove=="destra":
+
+          self.inverti()
+          '''
+          if self.image==self.images[0]:
+            self.image=self.imager[0]
+          elif self.image==self.images[1]:
+            self.image=self.imager[1]
+          elif self.image==self.imager[0]:
+            self.image=self.images[0]
+          elif self.image==self.imager[1]:
+            self.image=self.images[1]
+          '''
+          self.dove="sinistra"
     
-    if dir=="up"  and not self.hit("up"):
-      self.x+=int(math.cos(math.radians(self.angle))*self.speed)
-      self.y-=int(math.sin(math.radians(self.angle))*self.speed)
-
-      if self.dove=="sinistra":
-        self.inverti()
-        '''
-        if self.image==self.images[0]:
-          self.image=self.imager[0]
-        elif self.image==self.images[1]:
-          self.image=self.imager[1]
-        elif self.image==self.imager[0]:
-          self.image=self.images[0]
-        elif self.image==self.imager[1]:
-          self.image=self.images[1]
-        '''
-        self.dove="destra"
-
-    elif dir=="down"  and not self.hit("down"):
-      
-      self.x-=int(math.cos(math.radians(self.angle))*self.speed)
-      self.y+=int(math.sin(math.radians(self.angle))*self.speed)
-      #self.y=self.y*1.1
-      if self.dove=="destra":
-
-        self.inverti()
-        '''
-        if self.image==self.images[0]:
-          self.image=self.imager[0]
-        elif self.image==self.images[1]:
-          self.image=self.imager[1]
-        elif self.image==self.imager[0]:
-          self.image=self.images[0]
-        elif self.image==self.imager[1]:
-          self.image=self.images[1]
-        '''
-        self.dove="sinistra"
-  
     self.pos=(self.x,self.y)
     if self.angle<=90 or self.angle>270:
       if self.image==self.imager[0]:
@@ -220,7 +222,7 @@ class Car:
 
   def Draw(self):
     if self.y<=700 :
-      self.y+=7
+      self.y+=self.gravit
     
     self.pos=(self.x,self.y)
     self.angolo=self.angle
