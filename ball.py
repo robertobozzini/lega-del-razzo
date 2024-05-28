@@ -110,3 +110,4 @@ class Ball:
         self.display.blit(self.image,self.rect)
     #def collider(self,car1,car2):
         #roba con r
+        
