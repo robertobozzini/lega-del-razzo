@@ -106,7 +106,7 @@ class Car:
       
       self.x-=int(math.cos(math.radians(self.angle))*self.speed)
       self.y+=int(math.sin(math.radians(self.angle))*self.speed)
-
+      #self.y=self.y*1.1
       if self.dove=="destra":
 
         self.inverti()
