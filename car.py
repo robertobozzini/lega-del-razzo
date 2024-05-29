@@ -56,22 +56,19 @@ class Car:
     self.display=display
     self.speed=15
     self.gravit=gravit
+    self.tophit=False
+    self.dovetop=""
 
 
   def inverti(self):
     if self.image==self.images[0]:
       self.image=self.imager[0]
-      return
     elif self.image==self.images[1]:
       self.image=self.imager[1]
-      return
     elif self.image==self.imager[0]:
       self.image=self.images[0]
-      return
     elif self.image==self.imager[1]:
       self.image=self.images[1]
-      return
-    return
   
   def move(self,dir,cond):
 
@@ -125,17 +122,18 @@ class Car:
           self.dove="sinistra"
     
     self.pos=(self.x,self.y)
-    if self.angle<=90 or self.angle>270:
-      if self.image==self.imager[0]:
-        self.image=self.images[0]
-      elif self.image==self.imager[1]:
-        self.image=self.images[1]
-      #self.dove="destra"
-    elif self.angle>90 and self.angle<=270:
-      if self.image==self.images[0]:
-        self.image=self.imager[0]
-      elif self.image==self.images[1]:
-        self.image=self.imager[1]
+    if not self.hit("left"):
+      if self.angle<=90 or self.angle>270:
+        if self.image==self.imager[0]:
+          self.image=self.images[0]
+        elif self.image==self.imager[1]:
+          self.image=self.images[1]
+        #self.dove="destra"
+      elif self.angle>90 and self.angle<=270:
+        if self.image==self.images[0]:
+          self.image=self.imager[0]
+        elif self.image==self.images[1]:
+          self.image=self.imager[1]
       #self.dove="sinistra"
     
   def muoviruota(self,conta):
@@ -168,6 +166,8 @@ class Car:
       self.onground=False
   
   def hit(self,dir):
+
+
     self.angolo=self.angle
     if self.angle>90 and self.angle<=270:
       self.angolo-=180
@@ -178,24 +178,82 @@ class Car:
     hit=False
     if self.x+self.width> 1700:# and dir=="right":
       self.x= 1700-self.width
-      self.angle=90
+      if self.angle<180:
+        self.angle=90
+      else:
+        self.angle=270
+      #self.angle=90
       hit=True
+    
+    elif self.x==1700-self.width:
+      if self.angle>=0 and self.angle<90:
+        self.angle=90
+        hit=True
+      elif self.angle>=270 and self.angle<360:
+        self.angle=270
+        hit=True
+
+    
     elif self.x< 100:# and dir=="left":
       self.x= 100
-      self.angle=270
+      if self.angle<180:
+        self.angle=91
+      else:
+        self.angle=271
       hit=True
 
+    elif self.x==100:
+      if self.angle>91 and self.angle<180:
+        self.angle=91
+        hit=True
+      elif self.angle>=180 and self.angle<271:
+        self.angle=271
+        hit=True
+
+
     if self.y+self.height> 850:# and dir=="down":
-      #if self.rect.bottom+self.y> 900:
-      self.angle=0
+
       self.y= 850-self.height
-      
+      if self.angle<359 and self.angle>270:
+        self.angle=0
+
+      elif self.angle<270 and self.angle>180:
+        self.angle=180
       hit=True
+
+    elif self.y+self.height== 850:
+      if self.angle<359 and self.angle>270:
+        self.angle=0
+        hit=True
+      elif self.angle<270 and self.angle>180:
+        self.angle=180
+        hit=True
+    
 
     elif self.y< 30:# and dir=="up":
       self.y= 30
+      self.tophit=True
       self.angle=180
-      hit=True
+      if self.angle<=90 and self.angle>0:
+        self.inverti()
+        self.dovetop="destra"
+      else:
+        self.dovetop="sinistra"
+      hit=True    
+
+    elif self.y== 30:
+      if self.dovetop=="destra" and self.angle>180:
+        
+        self.angle=180
+        hit=True
+      elif self.dovetop=="sinistra" and self.angle<180:
+        self.angle=180
+        hit=True
+    
+    elif self.tophit==True:
+      self.dovetop==""
+      self.tophit=False
+      self.inverti()
     '''
     if (self.dove=="destra" and dir=="right") or (self.dove=="sinistra" and dir=="left"):
       if (self.x==1500 and self.angle==90)or (self.x==100 and self.angle==90) or (self.y==700 and self.angle==0) or (self.y==100 and self.angle==180): 
@@ -221,12 +279,12 @@ class Car:
 
 
   def Draw(self):
-    if self.y<=700 :
+    if self.y<=700:
       self.y+=self.gravit
     
     self.pos=(self.x,self.y)
     self.angolo=self.angle
-    if self.angle>90 and self.angle<=270:
+    if self.angle>90 and self.angle<=270 and not self.tophit:
       self.angolo-=180
 
     self.imagetodraw=pygame.transform.rotate(self.image,self.angolo)
