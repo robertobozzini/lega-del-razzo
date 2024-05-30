@@ -43,6 +43,7 @@ car2=Car(display,2,2,180,gravit)
 ball=Ball(WIDTH,HEIGHT,display)
 font=font = pygame.font.Font(None, 70)
 
+
 punteggio=font.render(f'{ball.punteggio[0]}                   {ball.punteggio[1]}', True, "White", None)
 rectpunti=punteggio.get_rect()#midtop=
 rectpunti.topleft=(890-rectpunti.right/2, 100)
