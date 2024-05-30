@@ -39,13 +39,16 @@ font=pygame.font.Font("freesansbold.ttf",32)
 gravit=3
 
 car1=Car(display,1,1,0,gravit)
-car2=Car(display,2,2,0,gravit)
+car2=Car(display,2,2,180,gravit)
 ball=Ball(WIDTH,HEIGHT,display)
-font=font = pygame.font.Font(None, 50)
-punteggio=font.render(f'{ball.punteggio[0]}         {ball.punteggio[1]}', True, "White", None)
-rectpunti=punteggio.get_rect(midtop=(900, 100))
+font=font = pygame.font.Font(None, 70)
+
+punteggio=font.render(f'{ball.punteggio[0]}                   {ball.punteggio[1]}', True, "White", None)
+rectpunti=punteggio.get_rect()#midtop=
+rectpunti.topleft=(890-rectpunti.right/2, 100)
 conta=0
 cond=False
+cond2=False
 while True:
 
     #if car1.muoviruota(conta):
@@ -55,11 +58,12 @@ while True:
     
     display.blit(mappa,(0,0))
     car1.Draw()
-    print("right left top bottom")
-    print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
+    car2.Draw()
+    #print("right left top bottom")
+    #print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
     
-    print(ball.punticardinali)
-    print(ball.puntistorti)
+    #print(ball.punticardinali)
+    #print(ball.puntistorti)
 
 
     k = pygame.key.get_pressed()
@@ -73,9 +77,16 @@ while True:
     if ball.gol():
         car1.golcar()
         car1.Draw()
-        ball.punteggio[0]=ball.punteggio[0]+1
-        punteggio=font.render(f'{ball.punteggio[0]}         {ball.punteggio[1]}', True, "White", None)
+        car2.golcar()
+        car2.Draw()
+
+    punteggio=font.render(f'{ball.punteggio[1]}                   {ball.punteggio[0]}', True, "White", None)
+   # rectpunti=punteggio.get_rect()#midtop=
+    #rectpunti.topleft=(920-rectpunti.right/2, 100)
     screen.blit(punteggio, rectpunti)
+
+
+    
     if (k[K_w] or k[K_s] or k[K_a] or k[K_d]):
         if car1.y<=700:
             car1.y+=gravit
@@ -109,9 +120,9 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
-        elif event.type==pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                ball.dirx=5
+        #elif event.type==pygame.KEYDOWN:
+            ##if event.key == pygame.K_RIGHT:
+                #ball.dirx=5
 
         
         #elif event.type==pygame.KEYDOWN:
@@ -127,10 +138,6 @@ while True:
         elif k[K_d]:
             car1.move("right")
         '''
-    # if (ball.rect.left<=220 and ball.rect.top>300 and ball.rect.top<520):
-    #     ball.punteggio[0]+=1
-    #     ball.punteggio[1]=ball.punteggio[1]
-    #     rectpunti=punteggio.get_rect(midtop=(900,100))
-    #     screen.blit(punteggio, rectpunti)
+    screen.blit(punteggio, rectpunti)
     fpsclock.tick(fps)
     pygame.display.update()

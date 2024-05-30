@@ -1,18 +1,22 @@
 import pygame,math,sys,random
 
-# dominus 1280 x 894
-# octane 1280 x 894
+
 class Car:
   def __init__(self,display,num,numcar,angle,gravit):
 
     
     listaimmagini=[pygame.image.load("./immagini/octane1f.png"),pygame.image.load("./immagini/octane2f.png"),
                pygame.image.load("./immagini/octane1rf.png"),pygame.image.load("./immagini/octane2rf.png"),
-               pygame.image.load("./immagini/dominus1.png"),pygame.image.load("./immagini/dominus2.png"),
-               pygame.image.load("./immagini/dominus1r.png"),pygame.image.load("./immagini/dominus2r.png")]
-    for i in range(0,len(listaimmagini),2):
-      listaimmagini[i]=pygame.transform.scale(listaimmagini[i],(212,98))
-      listaimmagini[i+1]=pygame.transform.scale(listaimmagini[i+1],(212,98))
+               pygame.image.load("./immagini/dominus1f.png"),pygame.image.load("./immagini/dominus2.png"),
+               pygame.image.load("./immagini/dominus1rf.png"),pygame.image.load("./immagini/dominus2r.png")]
+    if numcar==1:
+      for i in range(0,len(listaimmagini),2):
+        listaimmagini[i]=pygame.transform.scale(listaimmagini[i],(212,98))
+        listaimmagini[i+1]=pygame.transform.scale(listaimmagini[i+1],(212,98))
+    else:
+      for i in range(0,len(listaimmagini),2):
+        listaimmagini[i]=pygame.transform.scale(listaimmagini[i],(242,74))
+        listaimmagini[i+1]=pygame.transform.scale(listaimmagini[i+1],(242,74))
     self.dove="destra"
     self.num=num
     if num==1:
@@ -31,6 +35,8 @@ class Car:
         self.images=(listaimmagini[4],listaimmagini[5])
         #self.imager=(pygame.image.load("./immagini/dominus1r.png"),pygame.image.load("./immagini/dominus2r.png"))
         self.imager=(listaimmagini[6],listaimmagini[7])
+        self.width=242
+        self.height=74
       self.image=self.images[0]
     else:
       self.x= 1300
@@ -40,12 +46,16 @@ class Car:
         self.images=(listaimmagini[0],listaimmagini[1])
         #self.imager=(pygame.image.load("./immagini/octane1r.png"),pygame.image.load("./immagini/octane2r.png"))
         self.imager=(listaimmagini[2],listaimmagini[3])
+        self.width=212
+        self.height=98
       else:
         #self.images=(pygame.image.load("./immagini/dominus1.png"),pygame.image.load("./immagini/dominus2.png"))
         self.images=(listaimmagini[4],listaimmagini[5])
         #self.imager=(pygame.image.load("./immagini/dominus1r.png"),pygame.image.load("./immagini/dominus2r.png"))
         self.imager=(listaimmagini[6],listaimmagini[7])
-      self.image=self.images[1]
+        self.width=242
+        self.height=74
+      self.image=self.imager[0]
     self.pos=(self.x,self.y)
     self.onground=True
     self.turbo=100
