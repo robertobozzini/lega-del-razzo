@@ -140,6 +140,6 @@ while True:
         elif k[K_d]:
             car1.move("right")
         '''
-    #screen.blit(punteggio, rectpunti)
+    screen.blit(punteggio, rectpunti)
     fpsclock.tick(fps)
     pygame.display.update()
