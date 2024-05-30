@@ -68,6 +68,7 @@ while True:
 
     k = pygame.key.get_pressed()
 
+
     cond=ball.collide(car1)
     #print(ball.cond)
     ball.Draw()
