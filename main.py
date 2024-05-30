@@ -50,6 +50,7 @@ rectpunti.topleft=(890-rectpunti.right/2, 100)
 conta=0
 cond=False
 cond2=False
+
 while True:
 
     #if car1.muoviruota(conta):
@@ -71,7 +72,7 @@ while True:
 
 
     cond=ball.collide(car1)
-    #print(ball.cond)
+    print(ball.rect.left,ball.x,ball.recc.right)
     ball.Draw()
     screen.blit(display,(0,0))
     ball.Move()
@@ -128,7 +129,7 @@ while True:
             pygame.quit()
             sys.exit()
         #elif event.type==pygame.KEYDOWN:
-            ##if event.key == pygame.K_RIGHT:
+            #if event.key == pygame.K_RIGHT:
                 #ball.dirx=5
 
         
