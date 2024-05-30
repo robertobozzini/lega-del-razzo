@@ -71,7 +71,8 @@ class Car:
       self.image=self.images[1]
   
   def move(self,dir,cond):
-
+    self.imagetodraw=pygame.transform.rotate(self.image,self.angolo)
+    self.rect=self.imagetodraw.get_rect()
     if dir=="right" and not self.hit("right"):
       self.angle-=6
       #self.speedx= self.speed

@@ -69,8 +69,8 @@ while True:
     ball.Move()
 
     if ball.gol():
-        #print(f"gol:",ball.punteggio)
-        pass
+        car1.golcar()
+        car1.Draw()
 
     if (k[K_w] or k[K_s] or k[K_a] or k[K_d]):
         if car1.y<=700:
