@@ -1,9 +1,9 @@
 
 import pygame,sys
-#importa #altre funzioni da pygame
+
 from pygame.locals import *
 from random import randint
-#from ball import Ball
+
 from car import Car
 from ball import Ball
 pygame.init()
@@ -18,8 +18,6 @@ grey=(128, 128, 128)
 
 
 
-#green=pygame.transform.scale(greenn, (1800, 1000))
-#pygame.transform.rotate
 fps=60
 fpsclock=pygame.time.Clock()
 pygame.display.set_caption("lega del razzo")
@@ -33,9 +31,7 @@ display = pygame.Surface((1800, 1000))
 mappa=pygame.image.load("./immagini/mappa.png")
 mappa=pygame.transform.scale(mappa, (1800, 1000))
 font=pygame.font.Font("freesansbold.ttf",32)
-#testo=font.render("secondi=", True, black, white)
-#spaziotesto=testo.get_rect()
-#spaziotesto.center=(0,0)
+
 gravit=3
 
 car1=Car(display,1,1,0,gravit)
@@ -56,7 +52,7 @@ def schermata(screen):
     schermata=pygame.image.load("./immagini/SCHERMO.png")
     schermata=pygame.transform.scale(schermata,(1800,1000))
     rectone=schermata.get_rect()
-    # bottone=pygame.Surface((300,200))
+
     font=pygame.font.Font(None, 70)
     gioca=font.render("GIOCA", True, "white", None)
     rectbot=gioca.get_rect(midbottom=(900,600))
@@ -77,6 +73,8 @@ def schermata(screen):
         screen.blit(gioca,rectbot)
         clock.tick(fps)
         pygame.display.flip()
+
+
 def schermatafinale(screen,chi):
     font=font = pygame.font.Font(None, 120)
     schermata1=pygame.Surface((1800, 1000))
@@ -86,7 +84,7 @@ def schermatafinale(screen,chi):
     if chi==1:
         chihavinto=font.render("HA VINTO GIOCATORE 1", True, "White", None)
     else:
-        chihavinto=font.render("HA VINTO GIOCATORE 1", True, "White", None)
+        chihavinto=font.render("HA VINTO GIOCATORE 2", True, "White", None)
     rectchi=chihavinto.get_rect()
     rectchi.left=900-rectchi.right/2
     rectchi.top=400
@@ -105,29 +103,21 @@ def schermatafinale(screen,chi):
                     pygame.quit()
         clock.tick(fps)
         pygame.display.flip()
+
+
 schermata(screen)
 while True:
 
-    #if car1.muoviruota(conta):
-        #conta=0
-    #else: conta+=1
-    #car1.Onground()
-    
+
     display.blit(mappa,(0,0))
     car1.Draw()
     car2.Draw()
-    #print("right left top bottom")
-    #print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
-    
-    #print(ball.punticardinali)
-    #print(ball.puntistorti)
-
 
     k = pygame.key.get_pressed()
 
 
     cond=ball.collide(car1)
-    print(ball.rect.left,ball.x,ball.recc.right)
+    
     ball.Draw()
     screen.blit(display,(0,0))
     ball.Move()
@@ -138,9 +128,9 @@ while True:
         car2.golcar()
         car2.Draw()
 
+
     punteggio=font.render(f'{ball.punteggio[1]}                   {ball.punteggio[0]}', True, "White", None)
-   # rectpunti=punteggio.get_rect()#midtop=
-    #rectpunti.topleft=(920-rectpunti.right/2, 100)
+
     screen.blit(punteggio, rectpunti)
     if ball.punteggio[1]==5:
         schermatafinale(screen,1)
@@ -174,8 +164,7 @@ while True:
         car2.move("up",cond2)
     elif k[K_DOWN]:
         car2.move("down", cond2)
-            #print("down",end=" ")
-            #print(car1.dove)
+
     if k[K_LEFT]:
             car2.move("left", cond2)
     elif k[K_RIGHT]:
@@ -190,24 +179,8 @@ while True:
             if event.key==pygame.K_ESCAPE:
                 ball.punteggio=[0,0]
                 schermata(screen)
-        #elif event.type==pygame.KEYDOWN:
-            #if event.key == pygame.K_RIGHT:
-                #ball.dirx=5
 
-        
-        #elif event.type==pygame.KEYDOWN:
-        '''
-        k = pygame.key.get_pressed()
-            #car1
-        if k[K_w]:
-            car1.move("up")
-        elif k[K_s]:
-            car1.move("down")
-        if k[K_a]:
-            car1.move("left")
-        elif k[K_d]:
-            car1.move("right")
-        '''
+
     screen.blit(punteggio, rectpunti)
     fpsclock.tick(fps)
     pygame.display.update()

@@ -24,16 +24,16 @@ class Car:
       
       
       if numcar==1:
-        #self.images=(pygame.image.load("./immagini/octane1.png"),pygame.image.load("./immagini/octane2.png"))
+
         self.images=(listaimmagini[0],listaimmagini[1])
-        #self.imager=(pygame.image.load("./immagini/octane1r.png"),pygame.image.load("./immagini/octane2r.png"))
+
         self.imager=(listaimmagini[2],listaimmagini[3])
         self.width=212
         self.height=98
       else:
-        #self.images=(pygame.image.load("./immagini/dominus1.png"),pygame.image.load("./immagini/dominus2.png"))
+
         self.images=(listaimmagini[4],listaimmagini[5])
-        #self.imager=(pygame.image.load("./immagini/dominus1r.png"),pygame.image.load("./immagini/dominus2r.png"))
+
         self.imager=(listaimmagini[6],listaimmagini[7])
         self.width=242
         self.height=74
@@ -42,16 +42,16 @@ class Car:
       self.x= 1300
       
       if numcar==1:
-        #self.images=(pygame.image.load("./immagini/octane1.png"),pygame.image.load("./immagini/octane2.png"))
+
         self.images=(listaimmagini[0],listaimmagini[1])
-        #self.imager=(pygame.image.load("./immagini/octane1r.png"),pygame.image.load("./immagini/octane2r.png"))
+
         self.imager=(listaimmagini[2],listaimmagini[3])
         self.width=212
         self.height=98
       else:
-        #self.images=(pygame.image.load("./immagini/dominus1.png"),pygame.image.load("./immagini/dominus2.png"))
+
         self.images=(listaimmagini[4],listaimmagini[5])
-        #self.imager=(pygame.image.load("./immagini/dominus1r.png"),pygame.image.load("./immagini/dominus2r.png"))
+
         self.imager=(listaimmagini[6],listaimmagini[7])
         self.width=242
         self.height=74
@@ -61,9 +61,9 @@ class Car:
     self.onground=True
     self.turbo=100
     self.isturbo=0
-    #self.turbimage==pygame.load.image(turbimage)
+
     self.angle=angle
-    #pygame.transform.rotate(self.image,angle)
+
     self.display=display
     self.speed=15
     self.gravit=gravit
@@ -101,16 +101,7 @@ class Car:
 
         if self.dove=="sinistra":
           self.inverti()
-          '''
-          if self.image==self.images[0]:
-            self.image=self.imager[0]
-          elif self.image==self.images[1]:
-            self.image=self.imager[1]
-          elif self.image==self.imager[0]:
-            self.image=self.images[0]
-          elif self.image==self.imager[1]:
-            self.image=self.images[1]
-          '''
+
           self.dove="destra"
 
       elif dir=="down"  and not self.hit("down"):
@@ -121,16 +112,7 @@ class Car:
         if self.dove=="destra":
 
           self.inverti()
-          '''
-          if self.image==self.images[0]:
-            self.image=self.imager[0]
-          elif self.image==self.images[1]:
-            self.image=self.imager[1]
-          elif self.image==self.imager[0]:
-            self.image=self.images[0]
-          elif self.image==self.imager[1]:
-            self.image=self.images[1]
-          '''
+
           self.dove="sinistra"
     
     self.pos=(self.x,self.y)
@@ -266,16 +248,11 @@ class Car:
       self.dovetop==""
       self.tophit=False
       self.inverti()
-    '''
-    if (self.dove=="destra" and dir=="right") or (self.dove=="sinistra" and dir=="left"):
-      if (self.x==1500 and self.angle==90)or (self.x==100 and self.angle==90) or (self.y==700 and self.angle==0) or (self.y==100 and self.angle==180): 
-        hit=True
 
-    '''
     return hit
-  #reset macchina
+
   def golcar (self):
-    # nel main con una lista due variabili pos 0 punteggio 1 pos 1 punteggio 2
+
     if self.num==1:
       self.x=400
       self.y= 850-self.height
@@ -309,8 +286,7 @@ class Car:
     #'''
     if self.angle >180 and self.angle< 360:#270
       ix,iy=self.rect1.topright
-    #elif self.angle >=270 and self.angle< 360:
-      #ix,iy=self.rect1.topleft
+
     else:
       ix,iy=self.rect1.bottomleft
 
@@ -319,36 +295,16 @@ class Car:
     #'''
     if self.angle >180 and self.angle< 360:#270
       fx,fy=self.rect.topright
-    #elif self.angle >=270 and self.angle< 360:
-      #fx,fy=self.rect.topleft
+
     else:
       fx,fy=self.rect.bottomleft
-    '''
-    if self.angle>=0 and self.angle<=180:
-      if self.angle<=90:
-        ix,iy=self.rect1.bottomleft
-        fx,fy=self.rect.bottomleft
-      else:        
-        ix,iy=self.rect1.bottomright
-        fx,fy=self.rect.bottomright
-    else:
-      if self.angle>=270:
-        ix,iy=self.rect1.topleft
-        fx,fy=self.rect.topleft
-      else:
-        ix,iy=self.rect1.topright
-        fx,fy=self.rect.topright
-    '''
+
     dx=fx-ix
     dy=fy-iy
     x=self.x-dx
     y=self.y-dy
     pos=(x,y)
-    #self.x-=dx
-    #self.y-=dy
-    #self.pos=(self.x,self.y)
-    #pygame.draw.circle(self.display,(0,0,0),(fx+self.x,fy+self.y),10,0)
-    #pygame.draw.circle(self.display,(255,255,255),(ix+self.x,iy+self.y),10,0)
+
     self.display.blit(self.imagetodraw,pos)
 
     
