@@ -102,21 +102,18 @@ while True:
     elif k[K_d]:
         car1.move("right",cond)
  
-    '''
-    if not ball.collide(car2):
-        if k[K_UP]:
-            car2.move("up")
-            #print("up",end=" ")
-            #print(car1.dove)
-        elif k[K_DOWN]:
-            car2.move("down")
+ #bisgona mettere hitbox car 2
+    if k[K_UP]:
+        car2.move("up",cond)
+    elif k[K_DOWN]:
+        car2.move("down", cond)
             #print("down",end=" ")
             #print(car1.dove)
-        if k[K_LEFT]:
-            car2.move("left")
-        elif k[K_RIGHT]:
-            car2.move("right")
-    '''
+    if k[K_LEFT]:
+            car2.move("left", cond)
+    elif k[K_RIGHT]:
+            car2.move("right", cond)
+
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
