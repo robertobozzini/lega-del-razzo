@@ -132,7 +132,6 @@ class Ball:
     def gol(self):
         #right-left invertiti per renderlo piu facile
         if (self.rect.left<=220 and self.rect.top>300 and self.rect.top<520):
-
             self.punteggio[0]+=1
             self.x=self.WIDTH//2-(self.dim/2)
             self.y=self.HEIGHT//2-(self.dim/2)

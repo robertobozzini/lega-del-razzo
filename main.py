@@ -41,7 +41,9 @@ gravit=3
 car1=Car(display,1,1,0,gravit)
 car2=Car(display,2,2,0,gravit)
 ball=Ball(WIDTH,HEIGHT,display)
-
+font=font = pygame.font.Font(None, 50)
+punteggio=font.render(f'{ball.punteggio[0]}         {ball.punteggio[1]}', True, "White", None)
+rectpunti=punteggio.get_rect(midtop=(900, 100))
 conta=0
 cond=False
 while True:
@@ -53,6 +55,11 @@ while True:
     
     display.blit(mappa,(0,0))
     car1.Draw()
+    print("right left top bottom")
+    print(car1.x+car1.width,car1.x,car1.y,car1.y+car1.height)
+    
+    print(ball.punticardinali)
+    print(ball.puntistorti)
 
 
     k = pygame.key.get_pressed()
@@ -64,9 +71,9 @@ while True:
     ball.Move()
 
     if ball.gol():
-        #print(f"gol:",ball.punteggio)
-        pass
-
+        car1.golcar()
+        car1.Draw()
+        screen.blit(punteggio, rectpunti)
     if (k[K_w] or k[K_s] or k[K_a] or k[K_d]):
         if car1.y<=700:
             car1.y+=gravit
@@ -118,6 +125,6 @@ while True:
         elif k[K_d]:
             car1.move("right")
         '''
-            
+    screen.blit(punteggio, rectpunti)
     fpsclock.tick(fps)
     pygame.display.update()
