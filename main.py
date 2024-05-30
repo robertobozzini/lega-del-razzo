@@ -86,6 +86,7 @@ while True:
     screen.blit(punteggio, rectpunti)
 
 
+
     
     if (k[K_w] or k[K_s] or k[K_a] or k[K_d]):
         if car1.y<=700:
