@@ -54,6 +54,7 @@ while True:
     
     print(ball.punticardinali)
     print(ball.puntistorti)
+#o
 
 
     
