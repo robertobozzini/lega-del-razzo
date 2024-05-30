@@ -89,7 +89,7 @@ while True:
         car1.move("left",cond)
     elif k[K_d]:
         car1.move("right",cond)
-
+ 
     '''
     if not ball.collide(car2):
         if k[K_UP]:
