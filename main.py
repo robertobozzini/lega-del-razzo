@@ -72,6 +72,7 @@ while True:
     if ball.gol():
         car1.golcar()
         car1.Draw()
+        screen.blit(punteggio, rectpunti)
     if (k[K_w] or k[K_s] or k[K_a] or k[K_d]):
         if car1.y<=700:
             car1.y+=gravit
@@ -124,7 +125,5 @@ while True:
             car1.move("right")
         '''
     screen.blit(punteggio, rectpunti)
-    if ball.gol(): 
-        screen.blit(punteggio, rectpunti)
     fpsclock.tick(fps)
     pygame.display.update()
