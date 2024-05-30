@@ -154,6 +154,16 @@ while True:
         if event.type==pygame.KEYDOWN:
             if event.key==pygame.K_ESCAPE:
                 ball.punteggio=[0,0]
+                car1.golcar()
+                car1.Draw()
+                car2.golcar()
+                car2.Draw()
+                ball.x=ball.WIDTH//2-(ball.dim/2)
+                ball.y=ball.HEIGHT//2-(ball.dim/2)
+                ball.pos=(ball.x,ball.y)
+                ball.rect=ball.image.get_rect()
+                ball.dirx=0
+                ball.diry=0
                 schermata(screen)
         #elif event.type==pygame.KEYDOWN:
             #if event.key == pygame.K_RIGHT:
