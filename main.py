@@ -51,8 +51,27 @@ conta=0
 cond=False
 cond2=False
 
-def schermata():
-     
+def schermata(screen):
+    schermata=pygame.Surface((1800, 1000))
+    schermata=pygame.image.load("./immagini/SCHERM0.png")
+    schermata=pygame.transform.scale(schermata,(1800,1000))
+    rectone=schermata.get_rect()
+    bottone=pygame.Surface((300,200))
+    rectbot=bottone.get_rect(midbottom=(900,1000))
+    clock=pygame.time.Clock()
+    fps=60
+    b=True
+    while b==True:
+        lista=pygame.mouse.get_pos()
+        for event in pygame.event.get():
+            if event.type==pygame.MOUSEBUTTONDOWN and event.button==1:
+                if rectbot.collidepoint(lista):
+                    b=False
+        screen.blit(schermata,rectone)
+        screen.blit(bottone,rectbot)
+        clock.tick(fps)
+        pygame.display.flip()
+schermata(screen)
 while True:
 
     #if car1.muoviruota(conta):
