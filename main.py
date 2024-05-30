@@ -50,6 +50,9 @@ rectpunti.topleft=(890-rectpunti.right/2, 100)
 conta=0
 cond=False
 cond2=False
+
+def schermata():
+     
 while True:
 
     #if car1.muoviruota(conta):
