@@ -102,7 +102,7 @@ while True:
     elif k[K_d]:
         car1.move("right",cond)
  
- #bisgona mettere hitbox car 2
+ #bisgona mettere hitbox car 
     if k[K_UP]:
         car2.move("up",cond)
     elif k[K_DOWN]:
