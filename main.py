@@ -53,7 +53,7 @@ cond2=False
 
 def schermata(screen):
     schermata=pygame.Surface((1800, 1000))
-    schermata=pygame.image.load("./immagini/SCHERM0.png")
+    schermata=pygame.image.load("./immagini/SCHERMO.png")
     schermata=pygame.transform.scale(schermata,(1800,1000))
     rectone=schermata.get_rect()
     bottone=pygame.Surface((300,200))
@@ -64,11 +64,43 @@ def schermata(screen):
     while b==True:
         lista=pygame.mouse.get_pos()
         for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
             if event.type==pygame.MOUSEBUTTONDOWN and event.button==1:
                 if rectbot.collidepoint(lista):
                     b=False
+
         screen.blit(schermata,rectone)
         screen.blit(bottone,rectbot)
+        clock.tick(fps)
+        pygame.display.flip()
+def schermatafinale(screen,chi):
+    font=font = pygame.font.Font(None, 120)
+    schermata1=pygame.Surface((1800, 1000))
+    schermata1=pygame.image.load("./immagini/SCHERMO.png")
+    schermata1=pygame.transform.scale(schermata1,(1800,1000))
+    rectone=schermata1.get_rect()
+    if chi==1:
+        chihavinto=font.render("HA VINTO GIOCATORE 1", True, "White", None)
+    else:
+        chihavinto=font.render("HA VINTO GIOCATORE 1", True, "White", None)
+    rectchi=chihavinto.get_rect()
+    rectchi.left=900-rectchi.right/2
+    rectchi.top=400
+    clock=pygame.time.Clock()
+    fps=60
+
+    while True:
+        screen.blit(schermata1,rectone)
+        screen.blit(chihavinto,rectchi)
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type==pygame.KEYDOWN:
+                if event.key==K_ESCAPE:
+                    pygame.quit()
         clock.tick(fps)
         pygame.display.flip()
 schermata(screen)
@@ -108,7 +140,10 @@ while True:
    # rectpunti=punteggio.get_rect()#midtop=
     #rectpunti.topleft=(920-rectpunti.right/2, 100)
     screen.blit(punteggio, rectpunti)
-
+    if ball.punteggio[1]==5:
+        schermatafinale(screen,1)
+    elif ball.punteggio[0]==5:
+        schermatafinale(screen,2)
 
 
     
