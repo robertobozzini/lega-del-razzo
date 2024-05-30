@@ -17,12 +17,14 @@ class Ball:
         self.image=pygame.image.load("./immagini/Ballf.png")
         self.image=pygame.transform.scale(self.image, (self.dim,self.dim))
         self.rect=self.image.get_rect()
+        self.rect.topleft=self.pos
+        
         #self.dir=(0,0)
         self.dirx=0
         self.diry=0
         self.accgrav=0.2
-        self.punticardinali=[(self.x+self.dim/2,self.y),(self.x,self.y+self.dim/2),(self.x+self.dim/2,self.y+self.dim),(self.x+self.dim,self.y+self.dim/2)]
-        self.puntistorti=[(self.x,self.y),(self.x,self.y+self.dim),(self.x+self.dim,self.y+self.dim),(self.x+self.dim,self.y)]
+        #self.punticardinali=[(self.x+self.dim/2,self.y),(self.x,self.y+self.dim/2),(self.x+self.dim/2,self.y+self.dim),(self.x+self.dim,self.y+self.dim/2)]
+        #self.puntistorti=[(self.x,self.y),(self.x,self.y+self.dim),(self.x+self.dim,self.y+self.dim),(self.x+self.dim,self.y)]
         self.speed=10
         #self.cond=False
     def Move(self):
@@ -57,8 +59,8 @@ class Ball:
             self.dir=(-idir[0],-idir[1])
         '''
     def collide(self,car):
-        self.punticardinali=[(self.x+self.dim/2,self.y),(self.x,self.y+self.dim/2),(self.x+self.dim,self.y+self.dim/2),(self.x+self.dim/2,self.y+self.dim)]
-        self.puntistorti=[(self.x,self.y),(self.x,self.y+self.dim),(self.x+self.dim,self.y+self.dim),(self.x+self.dim,self.y)]
+        #self.punticardinali=[(self.x+self.dim/2,self.y),(self.x,self.y+self.dim/2),(self.x+self.dim,self.y+self.dim/2),(self.x+self.dim/2,self.y+self.dim)]
+        #self.puntistorti=[(self.x,self.y),(self.x,self.y+self.dim),(self.x+self.dim,self.y+self.dim),(self.x+self.dim,self.y)]
         #rect.collidepoint(coordinate)
         cond=False
         #recc=car.rect
@@ -69,7 +71,29 @@ class Ball:
             else:
                 recc.top-=car.width*math.sin(math.radians(car.angle))*(float(car.angle)/90.0)
         self.recc=recc
+        if self.rect.colliderect(self.recc):
+            if  self.recc.bottom>self.rect.bottom and self.recc.top<self.rect.top:
+                pass
+            elif self.recc.bottom>self.rect.bottom:
+                self.diry=-self.speed
+            elif self.recc.top<self.rect.top:
+                self.diry=self.speed
 
+            #if  self.recc.right<self.rect.left and self.recc.left>self.rect.right:
+                #pass
+            if car.num==1:
+                if self.recc.right>=self.x:
+                    self.dirx=self.speed
+                elif self.recc.left<=self.x+self.dim:
+                    self.dirx=-self.speed
+            else:
+                if self.recc.right>=self.x:
+                    self.dirx=-self.speed
+                elif self.recc.left<=self.x+self.dim:
+                    self.dirx=self.speed
+            cond=True
+        return cond
+        '''
         for i,punto in enumerate(self.punticardinali):
             if (recc.collidepoint(punto)):
             #if self.rect.colliderect(recc):
@@ -129,7 +153,7 @@ class Ball:
                     cond=True
                     break
         return cond
-    
+        '''
     def gol(self):
         #right-left invertiti per renderlo piu facile
         if (self.rect.left<=220 and self.rect.top>300 and self.rect.top<520):
@@ -154,11 +178,11 @@ class Ball:
 
     def Draw(self):
         self.display.blit(self.image,self.rect)
-        for punto in self.punticardinali:
-            pygame.draw.circle(self.display,(0,0,0),punto,10,0)
-        for punto in self.puntistorti:
-            pygame.draw.circle(self.display,(0,0,0),punto,10,0)
-        pygame.draw.rect(self.display,(0,0,0),self.recc,1)
+        #for punto in self.punticardinali:
+            #pygame.draw.circle(self.display,(0,0,0),punto,10,0)
+        #for punto in self.puntistorti:
+            #pygame.draw.circle(self.display,(0,0,0),punto,10,0)
+        #pygame.draw.rect(self.display,(0,0,0),self.recc,1)
     #def collider(self,car1,car2):
         #roba con r
         
