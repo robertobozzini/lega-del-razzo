@@ -103,6 +103,7 @@ class Ball:
                     #self.diry=abs(self.diry)
                 cond=True
                 break
+        #pygame.draw.rect(self.display,(0,0,0),self.recc,1)
 
         if not cond:
             for i,punto in enumerate(self.punticardinali):
