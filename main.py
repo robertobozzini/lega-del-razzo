@@ -89,7 +89,7 @@ while True:
 
     
     if (k[K_w] or k[K_s] or k[K_a] or k[K_d]):
-        if car1.y<=700:
+        if car1.y<850-car1.height:
             car1.y+=gravit
     if k[K_w]:
         car1.move("up",cond)
@@ -103,17 +103,24 @@ while True:
         car1.move("right",cond)
  
  #bisgona mettere hitbox car 2
+
+    if (k[K_UP] or k[K_DOWN] or k[K_LEFT] or k[K_RIGHT]):
+        if car2.y<850-car2.height:
+            car2.y+=gravit
+    cond2=ball.collide(car2)
+
     if k[K_UP]:
-        car2.move("up",cond)
+        car2.move("up",cond2)
     elif k[K_DOWN]:
-        car2.move("down", cond)
+        car2.move("down", cond2)
             #print("down",end=" ")
             #print(car1.dove)
     if k[K_LEFT]:
-            car2.move("left", cond)
+            car2.move("left", cond2)
     elif k[K_RIGHT]:
-            car2.move("right", cond)
+            car2.move("right", cond2)
 
+    ball.Draw()
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()

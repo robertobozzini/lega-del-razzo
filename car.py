@@ -21,7 +21,7 @@ class Car:
     self.num=num
     if num==1:
       self.x=400
-      self.y=700
+      
       
       if numcar==1:
         #self.images=(pygame.image.load("./immagini/octane1.png"),pygame.image.load("./immagini/octane2.png"))
@@ -40,7 +40,7 @@ class Car:
       self.image=self.images[0]
     else:
       self.x= 1300
-      self.y= 700
+      
       if numcar==1:
         #self.images=(pygame.image.load("./immagini/octane1.png"),pygame.image.load("./immagini/octane2.png"))
         self.images=(listaimmagini[0],listaimmagini[1])
@@ -56,6 +56,7 @@ class Car:
         self.width=242
         self.height=74
       self.image=self.imager[0]
+    self.y= 850-self.height
     self.pos=(self.x,self.y)
     self.onground=True
     self.turbo=100
@@ -187,8 +188,8 @@ class Car:
     self.rect=self.imagetodraw.get_rect()
 
     hit=False
-    if self.x+self.width> 1700:# and dir=="right":
-      self.x= 1700-self.width
+    if self.x+self.height> 1700:# and dir=="right":
+      self.x= 1700-self.height
       if self.angle<180:
         self.angle=90
       else:
@@ -196,7 +197,7 @@ class Car:
       #self.angle=90
       hit=True
     
-    elif self.x==1700-self.width:
+    elif self.x==1700-self.height:
       if self.angle>=0 and self.angle<90:
         self.angle=90
         hit=True
@@ -277,20 +278,24 @@ class Car:
     # nel main con una lista due variabili pos 0 punteggio 1 pos 1 punteggio 2
     if self.num==1:
       self.x=400
-      self.y=700
+      self.y= 850-self.height
       self.pos=(self.x,self.y)
+      if self.angle<=270 and  self.angle>90:
+        self.inverti()
       self.angle=0
       self.rect=self.image.get_rect()
     else:
       self.x= 1300
-      self.y= 700
+      self.y= 850-self.height
       self.pos=(self.x,self.y)
-      self.angle=0
+      if self.angle<=90 or  self.angle>270:
+        self.inverti()
+      self.angle=180
       self.rect=self.image.get_rect()
 
 
   def Draw(self):
-    if self.y<=700:
+    if self.y< 850-self.height:
       self.y+=self.gravit
     
     self.pos=(self.x,self.y)
