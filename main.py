@@ -56,8 +56,10 @@ def schermata(screen):
     schermata=pygame.image.load("./immagini/SCHERMO.png")
     schermata=pygame.transform.scale(schermata,(1800,1000))
     rectone=schermata.get_rect()
-    bottone=pygame.Surface((300,200))
-    rectbot=bottone.get_rect(midbottom=(900,1000))
+    # bottone=pygame.Surface((300,200))
+    font=pygame.font.Font(None, 70)
+    gioca=font.render("GIOCA", True, "white", None)
+    rectbot=gioca.get_rect(midbottom=(900,600))
     clock=pygame.time.Clock()
     fps=60
     b=True
@@ -72,7 +74,7 @@ def schermata(screen):
                     b=False
 
         screen.blit(schermata,rectone)
-        screen.blit(bottone,rectbot)
+        screen.blit(gioca,rectbot)
         clock.tick(fps)
         pygame.display.flip()
 def schermatafinale(screen,chi):
@@ -184,6 +186,10 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_ESCAPE:
+                ball.punteggio=[0,0]
+                schermata(screen)
         #elif event.type==pygame.KEYDOWN:
             #if event.key == pygame.K_RIGHT:
                 #ball.dirx=5
